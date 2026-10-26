@@ -10,7 +10,7 @@ class Stats(money: Int, energy: Int, points: Int) {
     fun showResources()
     {println("Энергия: $energy/10 Бюджет: $money Очков: $points")}
     fun change(deltaEnergy: Int, deltaMoney: Int, deltaPoint: Int): Boolean {
-        if (transactionApprove(deltaEnergy, deltaMoney, deltaPoint)){
+        if (transactionApprove(deltaEnergy, deltaMoney)){
             money += deltaMoney
             points += deltaPoint
             energy = minOf(energy + deltaEnergy, 10)
@@ -18,11 +18,8 @@ class Stats(money: Int, energy: Int, points: Int) {
         }
         return false
     }
-    // ресурсы нельзя опустить до нуля: такой ход (или эффект события) просто не применяется
-    fun transactionApprove(deltaEnergy: Int, deltaMoney: Int, deltaPoint: Int): Boolean {
-        if (deltaEnergy + energy > 0 && deltaMoney + money > 0) {return true
-        }
-        return false
+    fun transactionApprove(deltaEnergy: Int, deltaMoney: Int): Boolean {
+        return deltaEnergy + energy > 0 && deltaMoney + money > 0
     }
     fun pointsFor(a: Action): Int {
         return if (a == lastAction) a.points / 2 else a.points
