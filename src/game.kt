@@ -1,11 +1,11 @@
-enum class Action(val title: String, val energy: Int, val money: Int, val points: Int) {
-    WORK("Работа", -4, 0, 18),
-    INVEST("Вложение", 0, -30, 22),
-    REST("Отдых", 4, 0, 0),
+enum class Action(val energy: Int, val money: Int, val points: Int) {
+    WORK(-4, 0, 18),
+    INVEST(0, -30, 22),
+    REST(4, 0, 0),
 }
 
 class Game(var totalDays: Int, var stats: Stats) {
-    val eventsList = listOf<Event>(
+    val eventsList = listOf(
         FixedEvent("Мелочь, а приятно", "вы нашли на асфальте немного монет.", 0, 15, 0),
         CondEvent("Не с той ноги", "вы встали не с той ноги, и весь день всё валится из рук.", -2, 0, 0, 3, 0, 5),
         CondEvent("Вандалы","вандалы осквернили ваш алтарь, придется его восстанавливать", 0,0,-10,0,0,11),
